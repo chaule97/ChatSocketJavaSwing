@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ public class Client {
     JFrame main;
     JTextField txtUser;
     JButton btnDangNhap, btnThoat;
+    mychat c = null;
     public Client(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -73,11 +75,11 @@ public class Client {
     }
     void DangNhap(){
     	try{       	        
-    		mychat c = new mychat(txtUser.getText());   
+    		c = new mychat(txtUser.getText());   
             Thread t1=new Thread(c);
             t1.start();
             main.dispose();
-	   }catch(Exception e){e.printStackTrace();}
+	    }catch(Exception e){e.printStackTrace();}
     }
     public static void main(String args[]){
         EventQueue.invokeLater(new Runnable() {
