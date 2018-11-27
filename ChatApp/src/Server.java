@@ -7,7 +7,7 @@ class Server implements Runnable{
 	public static Vector clients=new Vector();
     public Server(Socket s){
             try{
-                    System.out.println("Client Got Connected  " );
+                    System.out.println("Server started " );
                     connectionSocket=s;
             }catch(Exception e){}
     }     
@@ -25,7 +25,6 @@ class Server implements Runnable{
                 
                 for (int i=0;i<clients.size();i++){
                    try{
-                	    System.out.println(i);
                         BufferedWriter bw= (BufferedWriter)clients.get(i);
                         bw.write(data1);
                         bw.write("\r\n");

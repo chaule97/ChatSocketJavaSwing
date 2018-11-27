@@ -6,7 +6,7 @@ import java.net.*;
 public class mychat implements Runnable{
     public JTextField tx;
     public JTextArea ta;
-    public String login="Imed";
+    public String login;
     BufferedWriter writer;
     BufferedReader reader;
     Socket socketClient = null;
@@ -14,7 +14,7 @@ public class mychat implements Runnable{
     public mychat(String l){
 	    login=l;        
 	    
-	    JFrame f=new JFrame(l);
+	    JFrame f=new JFrame(login);
 	    f.setSize(400,400);        
 	    
 	    JPanel p1=new JPanel();
@@ -59,28 +59,15 @@ public class mychat implements Runnable{
 	    	 }
 	    });
 	    
-	    b1.addActionListener(new ActionListener(){
-	        public void actionPerformed(ActionEvent ev){
-	            send();
-	        }
-	      }
-	    );
+		    b1.addActionListener(new ActionListener(){
+		        public void actionPerformed(ActionEvent ev){
+		            send();
+		        }
+		      }
+		    );
 	    
 	    f.setVisible(true);    
         
-    }
-    
-    public void close() {
-    	try {
-    		String s = login + " had left group";
-    		writer.write(s);
-            writer.write("\r\n");
-            writer.flush(); 
-			socketClient.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     }
     
     public void send() {
@@ -99,6 +86,18 @@ public class mychat implements Runnable{
             	System.out.println("from server: " + serverMsg);
                 ta.append(serverMsg+"\n");
             }
-        }catch(Exception e){e.printStackTrace();}
+        }catch(Exception e){}
+    }
+    public void close() {
+    	try {
+    		String s = login + " had left group";
+    		writer.write(s);
+            writer.write("\r\n");
+            writer.flush(); 
+			socketClient.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
